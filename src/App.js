@@ -1,23 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Todo1 from "./component/todo1";
+// import Todo from "./component/todo";
+
+// import Excel from "./Excel";
+// import Write from "./Write";
+// import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import UseStatedemo1 from "./component/UseState_demo1";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <UseStatedemo1 /> */}
+      {/* <Todo></Todo> */}
+      <Todo1></Todo1>
     </div>
   );
 }
