@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 
 function UseState_demo1() {
-  const [val, setVal] = useState([{}]);
-  
+  const [val, setVal] = useState([]);
 
   const handleAdd = () => {
-    const add = [...val, { name: "" }];
+    const add = [...val, { name: "", nameList: [] }];
     setVal(add);
   };
 
@@ -33,13 +32,23 @@ function UseState_demo1() {
   };
 
   const handleaddList = (index) => {
-    const addlist = [...val];
-    setVal(addlist);
-
-    console.log(addlist, "addlist");
+    const inputData = [...val];
+    inputData[index]["nameList"] = [
+      ...inputData[index]["nameList"],
+      inputData[index]["name"],
+    ];
+    inputData[index]["name"] = "";
+    setVal(inputData);
   };
 
   console.log(val, "VALUE");
+  const deleteName = (index, nIndex) => {
+    const inputData = [...val];
+    inputData[index]["nameList"] = inputData[index]["nameList"].filter(
+      (_, index) => index !== nIndex
+    );
+    setVal(inputData);
+  };
   return (
     <div>
       <button onClick={() => handleAdd()}>+</button>
@@ -54,7 +63,13 @@ function UseState_demo1() {
                   value={data.name || ""}
                 ></input>
                 <button onClick={() => handleaddList(index)}>Add</button>
-                <li>{val[0].name}</li>
+                {data.nameList.map((names, nIndex) => {
+                  return (
+                    <li key={nIndex} onClick={() => deleteName(index, nIndex)}>
+                      {names}{" "}
+                    </li>
+                  );
+                })}
               </div>
               <button onClick={() => handleDelete(index)}>-</button>
               <button
