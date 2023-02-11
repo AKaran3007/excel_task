@@ -14,18 +14,18 @@ function Demo() {
     setVal(inputData);
   };
 
-  const handleDelete = (index) => {
+const handleDelete = (index ) => {
     const deleteVal = [...val];
-    console.log(index);
-    const newArray = deleteVal.filter((item, itemIndex) => index !== itemIndex);
-    console.log(newArray);
+    console.log(index)
+    const newArray = deleteVal.filter((item, itemIndex) =>index !== itemIndex )
+    console.log(newArray)
     setVal(newArray);
   };
 
   const pushFunction = (index) => {
     const obj = [
       ...val.slice(0, index + 1),
-      { name: "", nameList: [] },
+      { name: "" , nameList: [] },
       ...val.slice(index + 1),
     ];
     setVal(obj);
