@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Demo() {
   const [val, setVal] = useState([]);
@@ -22,6 +23,18 @@ function Demo() {
     setVal(newArray);
   };
 
+  const handleRemoveList = (index) => {
+    let inputData = [...val];
+    const arrLen = inputData[index]["nameList"].length - 1;
+    const remArr = inputData[index]["nameList"].filter(
+      (_, index) => index !== arrLen
+    );
+    inputData[index] = { nameList: remArr };
+    setVal(inputData);
+    console.log(inputData, "removeList");
+    console.log(remArr, "remove");
+  };
+
   const pushFunction = (index) => {
     const obj = [
       ...val.slice(0, index + 1),
@@ -33,6 +46,10 @@ function Demo() {
   };
 
   const handleaddList = (index) => {
+    if (!val[index].name.trim().length) {
+      console.log("Empty");
+      return;
+    }
     const inputData = [...val];
     inputData[index]["nameList"] = [
       ...inputData[index]["nameList"],
@@ -40,6 +57,7 @@ function Demo() {
     ];
     inputData[index]["name"] = " ";
     setVal(inputData);
+    console.log(inputData, "handleaddlist");
   };
 
   const deleteName = (index, nIndex) => {
@@ -48,12 +66,32 @@ function Demo() {
       (_, index) => index !== nIndex
     );
     setVal(inputData);
+    console.log(inputData, "inputdelete");
+    console.log(index, "indexindexindex");
+  };
+
+  const savebtn = () => {
+    var btnSave = [];
+    var btn = {
+      val: val,
+    };
+    btnSave.push(btn);
+    console.log(btn, "btnSave");
+    localStorage.setItem("btnSave", JSON.stringify(btn));
   };
 
   console.log(val, "VALUE");
   return (
     <div>
-      <button onClick={() => handleAdd()}>+</button>
+      <div className="">
+        <button onClick={() => handleAdd()}>+</button>
+        <div className="viewbtn">
+          <Link to="/view">
+            <button>View</button>
+          </Link>
+        </div>
+      </div>
+
       {val.map((data, index) => {
         return (
           <div className="d-flex" key={index}>
@@ -64,7 +102,8 @@ function Demo() {
                   onChange={(e) => handleChange(e, index, "name")}
                   value={data.name || ""}
                 ></input>
-                <button onClick={() => handleaddList(index)}>Add</button>
+                <button onClick={() => handleaddList(index)}>Add</button> &nbsp;
+                <button onClick={() => handleRemoveList(index)}>Remove</button>
                 {data.nameList.map((names, nIndex) => {
                   return (
                     <li key={nIndex} onClick={() => deleteName(index, nIndex)}>
@@ -84,6 +123,10 @@ function Demo() {
           </div>
         );
       })}
+      <br />
+      <div>
+        <button onClick={savebtn}>Save</button>
+      </div>
     </div>
   );
 }

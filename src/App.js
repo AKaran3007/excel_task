@@ -1,13 +1,17 @@
 import "./App.css";
-// import Demo from "./component/Demo";
-// import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UseStatedemo from "./component/UseState_demo";
+import View from "./component/View";
 
 function App() {
   return (
     <div className="App">
-      <UseStatedemo />
-      {/* <Demo></Demo> */}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<UseStatedemo />} />
+          <Route path="/view" element={<View />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

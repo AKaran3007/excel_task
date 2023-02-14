@@ -22,4 +22,9 @@ code {
   width: 202px;
   margin: 0 auto;
   padding-top: 5px;
+  text-align: center;
+}
+
+.viewbtn{
+ margin-left: 50%;
 }
