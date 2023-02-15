@@ -9,7 +9,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<UseStatedemo />} />
-          <Route path="/view" element={<View />} />
+          <Route path="/view/:id" element={<View />} />
         </Routes>
       </BrowserRouter>
     </div>

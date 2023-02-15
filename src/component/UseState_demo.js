@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import { Link } from "react-router-dom";
 
 function Demo() {
@@ -71,25 +71,20 @@ function Demo() {
   };
 
   const savebtn = () => {
-    var btnSave = [];
-    var btn = {
-      val: val,
-    };
-    btnSave.push(btn);
-    console.log(btn, "btnSave");
-    localStorage.setItem("btnSave", JSON.stringify(btn));
+    localStorage.setItem("val", JSON.stringify(val));
+    setVal(val);
+    console.log(val, "local");
   };
+  useEffect(() => {
+    const localData = JSON.parse(localStorage.getItem("val"));
+    setVal(localData);
+  }, []);
 
   console.log(val, "VALUE");
   return (
     <div>
       <div className="">
         <button onClick={() => handleAdd()}>+</button>
-        <div className="viewbtn">
-          <Link to="/view">
-            <button>View</button>
-          </Link>
-        </div>
       </div>
 
       {val.map((data, index) => {
@@ -112,6 +107,11 @@ function Demo() {
                   );
                 })}
               </div>
+              <div className="viewbtn">
+                <Link to={`/view/${index}`}>
+                  <button >View</button>
+                </Link>
+              </div>
               <button onClick={() => handleDelete(index)}>-</button>
               <button
                 onClick={() => pushFunction(index)}
@@ -124,6 +124,7 @@ function Demo() {
         );
       })}
       <br />
+      {}
       <div>
         <button onClick={savebtn}>Save</button>
       </div>

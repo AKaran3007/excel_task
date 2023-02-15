@@ -54,3 +54,43 @@ function Demo() {
 }
 
 export default Demo;
+
+// import { Link, useParams } from "react-router-dom";
+// import React, { useState, useEffect } from "react";
+
+// function View() {
+//   const [locsto, SetLocsto] = useState([]);
+//   console.log(locsto, "locsto_state");
+
+//   let {id} = useParams()
+//   console.log(id , "a")
+
+//   useEffect(() => {
+//     const localData = JSON.parse(localStorage.getItem("val"));
+//     SetLocsto([localData]);
+//   }, []);
+//   return (
+//     <div>
+//       {locsto.map((data, index) => {
+//         console.log(data, "data");
+//         return (
+//           <div key={index}>
+//             <Link to="/">
+//               <button>Home</button>
+//             </Link>
+//             <div className="box">
+//               {data.val.map((val, valIndex) => {
+//                 return data.val[valIndex].nameList.map((list, listIndex) => {
+//                   return <li>{list}</li>;
+//                 });
+//               })}
+//             </div>
+//           </div>
+//         );
+//       })}
+//     </div>
+//   );
+// }
+
+// export default View;
+

@@ -1,19 +1,33 @@
-import { Link } from "react-router-dom";
-import React from "react";
+import { Link, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
 function View() {
-  const handleView = () => {
-    var btnSave = JSON.parse(localStorage.getItem("btnSave") || "[]");
-    console.log(btnSave);
-  };
+  const [locsto, SetLocsto] = useState([]);
+  console.log(locsto, "locsto_state");
 
+  let { id } = useParams();
+  let Id = parseInt(id);
+
+  useEffect(() => {
+    const localData = JSON.parse(localStorage.getItem("val"));
+    SetLocsto(localData);
+  }, []);
   return (
     <div>
-      <h1>Hello</h1>
       <Link to="/">
-        <button  onClick={() => handleView()}>Home</button>
+        <button>Home</button>
       </Link>
-      <button onClick={() => handleView()}>check</button>
+      {locsto.map((data, index) => {
+        return data.nameList.map((listData, listIndex) => {
+          return index === Id ? (
+            <div key={listIndex} className="box">
+              {listData}
+            </div>
+          ) : (
+            <></>
+          );
+        });
+      })}
     </div>
   );
 }
